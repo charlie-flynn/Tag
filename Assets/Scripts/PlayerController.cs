@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _jumpPower = 10.0f;
 
-    public bool IsPlayerOne { get { return _playerOne; } }
+    [SerializeField]
+    private float _jumpCooldownDuration = 0.10f;
+
 
     private Rigidbody _rigidbody;
 
@@ -25,15 +27,19 @@ public class PlayerController : MonoBehaviour
 
     private bool _canJump;
 
-    [SerializeField]
-    private float _jumpCooldownDuration = 0.10f;
     private float _jumpCooldown;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_jumpCooldown > 0) return;
+    public bool IsPlayerOne { get { return _playerOne; } }
 
-        _canJump = true;
+    private void OnTriggerStay(Collider other)
+    {
+        if (_jumpCooldown < 0.0f)
+            _canJump = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _canJump = false;
     }
 
     // Start is called before the first frame update

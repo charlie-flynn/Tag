@@ -177,6 +177,7 @@ MonoBehaviour:
   _acceleration: 300
   _maxSpeed: 5
   _jumpPower: 20
+  _jumpCooldownDuration: 0.1
 --- !u!114 &8316071276608910979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2497536770042408900}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -253,29 +254,20 @@ TrailRenderer:
       - serializedVersion: 3
         time: 0.3816802
         value: 0.42500234
-        inSlope: 7.3703012
-        outSlope: 7.3703012
+        inSlope: 1.8080392
+        outSlope: 1.8080392
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.18762584
+        inWeight: 0.15106322
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.84357446
-        value: 0.20125067
+        time: 0.8994404
+        value: 0
         inSlope: -4.6105614
         outSlope: -4.6105614
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.069535345
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.8910614
-        value: 0.2389937
-        inSlope: 13.509472
-        outSlope: 13.509472
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.29411107
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
