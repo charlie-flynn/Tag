@@ -75,9 +75,9 @@ public class GameManager : MonoBehaviour
 
         // check if either timer is finished, and win the game if so
         if (_player1Timer.TimeRemaining <= 0.0f)
-            Win("Player 1 wins!");
-        else if (_player2Timer.TimeRemaining <= 0.0f)
             Win("Player 2 wins!");
+        else if (_player2Timer.TimeRemaining <= 0.0f)
+            Win("Player 1 wins!");
 
     }
 
@@ -122,5 +122,11 @@ public class GameManager : MonoBehaviour
     {
         // Reload the active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        // Go to main menu
+        SceneManager.LoadScene(0);
     }
 }

@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 2497536770042408900}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.17, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177,7 +177,9 @@ MonoBehaviour:
   _acceleration: 300
   _maxSpeed: 5
   _jumpPower: 20
+  _dashPower: 25
   _jumpCooldownDuration: 0.1
+  _dashCooldownDuration: 2
 --- !u!114 &8316071276608910979
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,13 @@ public class PlayerController : MonoBehaviour
     private float _jumpPower = 10.0f;
 
     [SerializeField]
+    private float _dashPower = 15.0f;
+
+    [SerializeField]
     private float _jumpCooldownDuration = 0.10f;
+
+    [SerializeField]
+    private float _dashCooldownDuration = 2.0f;
 
 
     private Rigidbody _rigidbody;
@@ -29,12 +35,18 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpCooldown;
 
+    private float _dashCooldown;
+
+    private bool _isDashing;
+
     public bool IsPlayerOne { get { return _playerOne; } }
 
     private void OnTriggerStay(Collider other)
     {
         if (_jumpCooldown < 0.0f)
             _canJump = true;
+
+        _isDashing = false;
     }
 
     private void OnTriggerExit(Collider other)
@@ -52,6 +64,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _jumpCooldown -= Time.deltaTime;
+        _dashCooldown -= Time.deltaTime;
 
         // if player one, use player1horizontal, otherwise use player2horizontal
         if (_playerOne)
@@ -60,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.W))
                 Jump();
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                Dash();
         }
         else
         {
@@ -67,12 +83,17 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 Jump();
+
+            if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetKeyDown(KeyCode.RightControl))
+                Dash();
         }
     }
 
     // FixedUpdate is called every fixed framerate frame
     void FixedUpdate()
     {
+        if (_isDashing) return;
+
         Vector3 deltaMovement = new Vector3();
         deltaMovement.x = _moveInput * _acceleration;
         _rigidbody.AddForce(deltaMovement * Time.fixedDeltaTime, ForceMode.VelocityChange);
@@ -89,9 +110,19 @@ public class PlayerController : MonoBehaviour
     {
         if (!_canJump) return;
 
-        _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.VelocityChange);
         _jumpCooldown = _jumpCooldownDuration;
 
         _canJump = false;
+    }
+
+    void Dash()
+    {
+        if (_dashCooldown > 0.0f || _moveInput == 0 || _canJump) return;
+
+        _rigidbody.AddForce(new Vector3(_moveInput * _dashPower, 1.0f), ForceMode.Impulse);
+
+        _dashCooldown = _dashCooldownDuration;
+        _isDashing = true;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 
 public class TitleScreenManager : MonoBehaviour
@@ -23,13 +24,16 @@ public class TitleScreenManager : MonoBehaviour
         // add the load scene function as a listener to each button, then parent it to the scene window
         for (int i = 0; i < _sceneButtons.Length; i++)
         {
-            _sceneButtons[i].onClick.AddListener(delegate { SceneManager.LoadScene(i); });
+            _sceneButtons[i].onClick.AddListener(delegate 
+            { 
+                SceneManager.LoadScene(i);
+            });
             _sceneButtons[i].enabled = false;
 
             if (_sceneButtons[i].TryGetComponent(out Image image))
                 image.enabled = false;
 
-            _sceneButtons[i].GetComponent<TextMeshProUGUI>().enabled = false;
+            _sceneButtons[i].GetComponentInChildren<TextMeshProUGUI>(true).enabled = false;
         }
     }
 
@@ -44,7 +48,7 @@ public class TitleScreenManager : MonoBehaviour
             if (_sceneButtons[i].TryGetComponent(out Image image))
                 image.enabled = value;
 
-            _sceneButtons[i].GetComponent<TextMeshProUGUI>().enabled = value;
+            _sceneButtons[i].GetComponentInChildren<TextMeshProUGUI>(true).enabled = value;
         }
         for (int i = 0; i < _otherButtons.Length; i++)
         {
@@ -55,7 +59,7 @@ public class TitleScreenManager : MonoBehaviour
             if (_otherButtons[i].TryGetComponent(out Image image))
                 image.enabled = value;
 
-            _otherButtons[i].GetComponent<TextMeshProUGUI>().enabled = value;
+            _otherButtons[i].GetComponentInChildren<TextMeshProUGUI>(true).enabled = value;
         }
     }
 }
