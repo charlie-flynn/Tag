@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     private float _dashPower = 15.0f;
 
     [SerializeField]
-    private float _jumpCooldownDuration = 0.10f;
+    private float _dashCooldownDuration = 2.0f;
 
     [SerializeField]
-    private float _dashCooldownDuration = 2.0f;
+    private float _WavedashWindow = 0.1f;
 
 
     private Rigidbody _rigidbody;
@@ -33,25 +33,36 @@ public class PlayerController : MonoBehaviour
 
     private bool _canJump;
 
-    private float _jumpCooldown;
-
     private float _dashCooldown;
+
+    private float _wavedashCooldown;
 
     private bool _isDashing;
 
     public bool IsPlayerOne { get { return _playerOne; } }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        _isDashing = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (_jumpCooldown < 0.0f)
-            _canJump = true;
+        _canJump = true;
 
-        _isDashing = false;
+        if (_isDashing)
+        {
+            _wavedashCooldown -= Time.deltaTime;
+
+            if (_wavedashCooldown < 0.0f)
+                _isDashing = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         _canJump = false;
+        _wavedashCooldown = _WavedashWindow;
     }
 
     // Start is called before the first frame update
@@ -63,7 +74,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        _jumpCooldown -= Time.deltaTime;
         _dashCooldown -= Time.deltaTime;
 
         // if player one, use player1horizontal, otherwise use player2horizontal
@@ -111,7 +121,6 @@ public class PlayerController : MonoBehaviour
         if (!_canJump) return;
 
         _rigidbody.AddForce(Vector3.up * _jumpPower, ForceMode.VelocityChange);
-        _jumpCooldown = _jumpCooldownDuration;
 
         _canJump = false;
     }

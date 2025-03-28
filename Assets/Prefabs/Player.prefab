@@ -160,7 +160,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: -0.6, z: 0}
+  m_Center: {x: 0, y: -0.65, z: 0}
 --- !u!114 &9062095126354249525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   _maxSpeed: 5
   _jumpPower: 20
   _dashPower: 25
-  _jumpCooldownDuration: 0.1
   _dashCooldownDuration: 2
+  _WavedashWindow: 0.1
 --- !u!114 &8316071276608910979
 MonoBehaviour:
   m_ObjectHideFlags: 0
