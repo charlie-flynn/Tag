@@ -11,6 +11,9 @@ public class TagSystem : MonoBehaviour
     [SerializeField]
     private float _tagImmunityDuration = 1.0f;
 
+    [SerializeField]
+    private GameObject _tagParticlesPrefab;
+
     private bool _tagImmune = false;
 
     private bool _tagged = false;
@@ -56,6 +59,15 @@ public class TagSystem : MonoBehaviour
         if (TryGetComponent(out TrailRenderer renderer))
             renderer.emitting = true;
 
+        SpawnParticles();
+
         return true;
+    }
+
+    private void SpawnParticles()
+    {
+        if (!_tagParticlesPrefab) return;
+
+        Instantiate(_tagParticlesPrefab, gameObject.transform.position, gameObject.transform.rotation);
     }
 }

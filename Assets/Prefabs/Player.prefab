@@ -194,6 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startTagged: 0
   _tagImmunityDuration: 1
+  _tagParticlesPrefab: {fileID: 7195802267357014212, guid: 2b37fbe896fb9ab4fbd085da52ef213d,
+    type: 3}
 --- !u!114 &4677986820398445858
 MonoBehaviour:
   m_ObjectHideFlags: 0

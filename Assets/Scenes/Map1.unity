@@ -2597,11 +2597,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062095126354249525, guid: 20986409e0dc09046a67784712179622,
         type: 3}
-      propertyPath: _dashPower
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062095126354249525, guid: 20986409e0dc09046a67784712179622,
-        type: 3}
       propertyPath: _playerOne
       value: 1
       objectReference: {fileID: 0}

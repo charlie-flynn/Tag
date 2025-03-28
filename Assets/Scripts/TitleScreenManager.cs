@@ -21,13 +21,9 @@ public class TitleScreenManager : MonoBehaviour
 
     private void Start()
     {
-        // add the load scene function as a listener to each button, then parent it to the scene window
+        // disable the scene buttons
         for (int i = 0; i < _sceneButtons.Length; i++)
         {
-            _sceneButtons[i].onClick.AddListener(delegate 
-            { 
-                SceneManager.LoadScene(i);
-            });
             _sceneButtons[i].enabled = false;
 
             if (_sceneButtons[i].TryGetComponent(out Image image))
@@ -39,6 +35,7 @@ public class TitleScreenManager : MonoBehaviour
 
     public void SwitchToSceneSelection()
     {
+        // swap the enabled and disabled values for the two buttons
         for (int i = 0; i < _sceneButtons.Length; i++)
         {
             bool value = _sceneButtons[i].enabled ? false : true;
@@ -61,5 +58,15 @@ public class TitleScreenManager : MonoBehaviour
 
             _otherButtons[i].GetComponentInChildren<TextMeshProUGUI>(true).enabled = value;
         }
+    }
+
+    public void LoadSceneIndex(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
