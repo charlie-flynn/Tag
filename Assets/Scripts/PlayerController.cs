@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float _dashCooldownDuration = 2.0f;
 
     [SerializeField]
-    private float _WavedashWindow = 0.1f;
+    private float _bunnyHopWindow = 0.2f;
 
 
     private Rigidbody _rigidbody;
@@ -35,34 +35,32 @@ public class PlayerController : MonoBehaviour
 
     private float _dashCooldown;
 
-    private float _wavedashCooldown;
+    private float _bunnyHopTime;
 
     private bool _isDashing;
 
     public bool IsPlayerOne { get { return _playerOne; } }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        _isDashing = false;
+        if (_isDashing)
+        {
+            _bunnyHopTime -= Time.deltaTime;
+
+            if (_bunnyHopTime < 0.0f || (_rigidbody.velocity.x <= _maxSpeed && _rigidbody.velocity.x >= -_maxSpeed) )
+                _isDashing = false;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         _canJump = true;
-
-        if (_isDashing)
-        {
-            _wavedashCooldown -= Time.deltaTime;
-
-            if (_wavedashCooldown < 0.0f)
-                _isDashing = false;
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         _canJump = false;
-        _wavedashCooldown = _WavedashWindow;
+        _bunnyHopTime = _bunnyHopWindow;
     }
 
     // Start is called before the first frame update
