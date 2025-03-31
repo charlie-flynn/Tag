@@ -179,7 +179,7 @@ MonoBehaviour:
   _jumpPower: 20
   _dashPower: 25
   _dashCooldownDuration: 2
-  _WavedashWindow: 0.1
+  _bunnyHopWindow: 0.2
 --- !u!114 &8316071276608910979
 MonoBehaviour:
   m_ObjectHideFlags: 0
